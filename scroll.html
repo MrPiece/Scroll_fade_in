@@ -55,12 +55,12 @@
       let windowOffset = Math.round(window.innerHeight);
 
       // Offset from top of the document for every square
-      let blue = {block: blockElements[0], offset: blockElements[0].offsetTop - window.pageYOffset};
-      let red = {block: blockElements[1], offset: blockElements[1].offsetTop - window.pageYOffset};
+      let text = {block: blockElements[0], offset: blockElements[0].offsetTop - window.pageYOffset};
+      let image = {block: blockElements[1], offset: blockElements[1].offsetTop - window.pageYOffset};
       let green = {block: blockElements[2], offset: blockElements[2].offsetTop - window.pageYOffset};
       let yellow = {block: blockElements[3], offset: blockElements[3].offsetTop - window.pageYOffset};
 
-      let squares = [blue, red, green, yellow];
+      let squares = [text, image, green, yellow];
       for (let square of squares) {
         if (square.offset <= windowOffset) {
           // Fade in element by increasing it's opacity
