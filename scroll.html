@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #root {
+      
+    }
+
+    .block {
+      width: 300px;
+      height: 300px;
+      margin: 100vh auto;
+    }
+
+    .text {
+      width: 50%;
+      text-align: center;
+      background-color: antiquewhite;
+      height: 100%;
+      padding: 20px;
+    }
+
+    .image {
+      background-image: url('image.png');
+      background-size: cover;
+      background-position: center;
+      width: 640px;
+      height: 427px;
+    }
+
+    .blue {background: blue; opacity: 0}
+    .green {background: green; opacity: 0}
+    .red {background: red; opacity: 0}
+    .yellow {background: yellow; opacity: 0}
+  </style>
+  <title>Scroll animation</title>
+</head>
+<body>
+  <div id='root'>
+    <div class="block text">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas scelerisque interdum lorem nec venenatis. Aenean rutrum massa velit, non imperdiet quam luctus sed. In condimentum, dui vulputate placerat sollicitudin, massa enim suscipit nisl, ut ornare sem orci in erat. Phasellus libero sem, faucibus sit amet quam ut, cursus feugiat nisi. Nulla facilisi. Donec vitae sapien eleifend, varius nulla a, eleifend nisl. Ut diam mi, ultrices vel sem in, rhoncus feugiat mauris. Praesent vel ipsum ornare neque consectetur euismod. Morbi lacinia viverra imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce a ipsum vitae ligula pulvinar blandit suscipit non justo. Praesent a consequat odio. Donec nec accumsan justo. Mauris malesuada neque et felis molestie tincidunt.
+    </div>
+    <div class="block image"></div>
+    <div class="block green"></div>
+    <div class="block yellow"></div>
+  </div>
+
+  <script>
+    const blockElements = document.querySelectorAll('.block');
+
+    document.addEventListener('scroll', () => {
+      // Height to start fadeIn from
+      let windowOffset = Math.round(window.innerHeight);
+
+      // Offset from top of the document for every square
+      let blue = {block: blockElements[0], offset: blockElements[0].offsetTop - window.pageYOffset};
+      let red = {block: blockElements[1], offset: blockElements[1].offsetTop - window.pageYOffset};
+      let green = {block: blockElements[2], offset: blockElements[2].offsetTop - window.pageYOffset};
+      let yellow = {block: blockElements[3], offset: blockElements[3].offsetTop - window.pageYOffset};
+
+      let squares = [blue, red, green, yellow];
+      for (let square of squares) {
+        if (square.offset <= windowOffset) {
+          // Fade in element by increasing it's opacity
+          let k = 0.0015;
+          let opacity = k * (windowOffset - square.offset);
+          square.block.style.opacity = opacity >= 1 ? 1 : opacity;
+        } else {
+          // If window is too high from element
+          square.block.style.opacity = 0;
+        }
+      }
+    })
+  </script>
+</body>
+</html>
